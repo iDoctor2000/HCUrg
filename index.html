@@ -27,10 +27,10 @@
         <form id="physicalExamForm" class="space-y-8">
 
             <!-- Sección: Aspecto General -->
-            <div class="p-6 bg-green-50 rounded-xl shadow-md border border-green-200">
+            <div id="aspectoGeneralSection" class="p-6 bg-green-50 rounded-xl shadow-md border border-green-200">
                 <h2 class="text-2xl font-semibold text-green-800 mb-4 flex items-center justify-between">
                     Aspecto General
-                    <button type="button" class="btn-normal" data-section="aspectoGeneral">Marcar como Normal</button>
+                    <button type="button" class="btn-normal" data-section-target="aspectoGeneralSection">Marcar como Normal</button>
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
@@ -118,15 +118,18 @@
             </div>
 
             <!-- Sección: Paciente Politraumatizado (ABCDE) -->
-            <div class="p-6 bg-red-100 rounded-xl shadow-md border border-red-300">
+            <div id="politraumatizadoSection" class="p-6 bg-red-100 rounded-xl shadow-md border border-red-300">
                 <h2 class="text-2xl font-semibold text-red-900 mb-4 flex items-center justify-between">
                     Paciente Politraumatizado (ABCDE)
-                    <button type="button" class="btn-normal" data-section="politraumatizado">Marcar como Normal</button>
+                    <button type="button" class="btn-normal" data-section-target="politraumatizadoSection">Marcar como Normal</button>
                 </h2>
                 <div class="space-y-6">
                     <!-- A - Vía Aérea -->
-                    <div class="p-4 bg-red-50 rounded-lg border border-red-200">
-                        <h3 class="text-lg font-medium text-red-800 mb-2">A - Vía Aérea</h3>
+                    <div id="pt_airway_section" class="p-4 bg-red-50 rounded-lg border border-red-200">
+                        <h3 class="text-lg font-medium text-red-800 mb-2 flex items-center justify-between">
+                            A - Vía Aérea
+                            <button type="button" class="btn-normal-sub" data-section-target="pt_airway_section">Normal A</button>
+                        </h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label for="pt_airway_permeabilidad" class="block text-sm font-medium text-gray-700">Permeabilidad</label>
@@ -151,8 +154,11 @@
                     </div>
 
                     <!-- B - Respiración -->
-                    <div class="p-4 bg-red-50 rounded-lg border border-red-200">
-                        <h3 class="text-lg font-medium text-red-800 mb-2">B - Respiración</h3>
+                    <div id="pt_breathing_section" class="p-4 bg-red-50 rounded-lg border border-red-200">
+                        <h3 class="text-lg font-medium text-red-800 mb-2 flex items-center justify-between">
+                            B - Respiración
+                            <button type="button" class="btn-normal-sub" data-section-target="pt_breathing_section">Normal B</button>
+                        </h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label for="pt_breathing_patron" class="block text-sm font-medium text-gray-700">Patrón Respiratorio</label>
@@ -200,8 +206,11 @@
                     </div>
 
                     <!-- C - Circulación -->
-                    <div class="p-4 bg-red-50 rounded-lg border border-red-200">
-                        <h3 class="text-lg font-medium text-red-800 mb-2">C - Circulación</h3>
+                    <div id="pt_circulation_section" class="p-4 bg-red-50 rounded-lg border border-red-200">
+                        <h3 class="text-lg font-medium text-red-800 mb-2 flex items-center justify-between">
+                            C - Circulación
+                            <button type="button" class="btn-normal-sub" data-section-target="pt_circulation_section">Normal C</button>
+                        </h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label for="pt_circulation_pulso" class="block text-sm font-medium text-gray-700">Pulso</label>
@@ -248,8 +257,11 @@
                     </div>
 
                     <!-- D - Déficit Neurológico -->
-                    <div class="p-4 bg-red-50 rounded-lg border border-red-200">
-                        <h3 class="text-lg font-medium text-red-800 mb-2">D - Déficit Neurológico</h3>
+                    <div id="pt_disability_section" class="p-4 bg-red-50 rounded-lg border border-red-200">
+                        <h3 class="text-lg font-medium text-red-800 mb-2 flex items-center justify-between">
+                            D - Déficit Neurológico
+                            <button type="button" class="btn-normal-sub" data-section-target="pt_disability_section">Normal D</button>
+                        </h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label for="pt_disability_conciencia" class="block text-sm font-medium text-gray-700">Nivel de Conciencia (AVPU)</label>
@@ -292,8 +304,11 @@
                     </div>
 
                     <!-- E - Exposición / Medio Ambiente -->
-                    <div class="p-4 bg-red-50 rounded-lg border border-red-200">
-                        <h3 class="text-lg font-medium text-red-800 mb-2">E - Exposición / Medio Ambiente</h3>
+                    <div id="pt_exposure_section" class="p-4 bg-red-50 rounded-lg border border-red-200">
+                        <h3 class="text-lg font-medium text-red-800 mb-2 flex items-center justify-between">
+                            E - Exposición / Medio Ambiente
+                            <button type="button" class="btn-normal-sub" data-section-target="pt_exposure_section">Normal E</button>
+                        </h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label for="pt_exposure_temp" class="block text-sm font-medium text-gray-700">Temperatura Corporal (°C)</label>
@@ -318,10 +333,10 @@
             </div>
 
             <!-- Sección: Cabeza y Cuello -->
-            <div class="p-6 bg-red-50 rounded-xl shadow-md border border-red-200">
+            <div id="cabezaCuelloSection" class="p-6 bg-red-50 rounded-xl shadow-md border border-red-200">
                 <h2 class="text-2xl font-semibold text-red-800 mb-4 flex items-center justify-between">
                     Cabeza y Cuello
-                    <button type="button" class="btn-normal" data-section="cabezaCuello">Marcar como Normal</button>
+                    <button type="button" class="btn-normal" data-section-target="cabezaCuelloSection">Marcar como Normal</button>
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <!-- Piel y Faneras -->
@@ -570,10 +585,10 @@
             </div>
 
             <!-- Sección: Tórax -->
-            <div class="p-6 bg-purple-50 rounded-xl shadow-md border border-purple-200">
+            <div id="toraxSection" class="p-6 bg-purple-50 rounded-xl shadow-md border border-purple-200">
                 <h2 class="text-2xl font-semibold text-purple-800 mb-4 flex items-center justify-between">
                     Tórax
-                    <button type="button" class="btn-normal" data-section="torax">Marcar como Normal</button>
+                    <button type="button" class="btn-normal" data-section-target="toraxSection">Marcar como Normal</button>
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <!-- Inspección -->
@@ -751,10 +766,10 @@
             </div>
 
             <!-- Sección: Cardiovascular -->
-            <div class="p-6 bg-teal-50 rounded-xl shadow-md border border-teal-200">
+            <div id="cardiovascularSection" class="p-6 bg-teal-50 rounded-xl shadow-md border border-teal-200">
                 <h2 class="text-2xl font-semibold text-teal-800 mb-4 flex items-center justify-between">
                     Cardiovascular
-                    <button type="button" class="btn-normal" data-section="cardiovascular">Marcar como Normal</button>
+                    <button type="button" class="btn-normal" data-section-target="cardiovascularSection">Marcar como Normal</button>
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <!-- Inspección y Palpación -->
@@ -871,10 +886,10 @@
             </div>
 
             <!-- Sección: Abdomen -->
-            <div class="p-6 bg-yellow-50 rounded-xl shadow-md border border-yellow-200">
+            <div id="abdomenSection" class="p-6 bg-yellow-50 rounded-xl shadow-md border border-yellow-200">
                 <h2 class="text-2xl font-semibold text-yellow-800 mb-4 flex items-center justify-between">
                     Abdomen
-                    <button type="button" class="btn-normal" data-section="abdomen">Marcar como Normal</button>
+                    <button type="button" class="btn-normal" data-section-target="abdomenSection">Marcar como Normal</button>
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <!-- Inspección -->
@@ -1038,10 +1053,10 @@
             </div>
 
             <!-- Sección: Extremidades -->
-            <div class="p-6 bg-indigo-50 rounded-xl shadow-md border border-indigo-200">
+            <div id="extremidadesSection" class="p-6 bg-indigo-50 rounded-xl shadow-md border border-indigo-200">
                 <h2 class="text-2xl font-semibold text-indigo-800 mb-4 flex items-center justify-between">
                     Extremidades
-                    <button type="button" class="btn-normal" data-section="extremidades">Marcar como Normal</button>
+                    <button type="button" class="btn-normal" data-section-target="extremidadesSection">Marcar como Normal</button>
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
@@ -1183,10 +1198,10 @@
             </div>
 
             <!-- Sección: Sistema Nervioso -->
-            <div class="p-6 bg-pink-50 rounded-xl shadow-md border border-pink-200">
+            <div id="sistemaNerviosoSection" class="p-6 bg-pink-50 rounded-xl shadow-md border border-pink-200">
                 <h2 class="text-2xl font-semibold text-pink-800 mb-4 flex items-center justify-between">
                     Sistema Nervioso
-                    <button type="button" class="btn-normal" data-section="sistemaNervioso">Marcar como Normal</button>
+                    <button type="button" class="btn-normal" data-section-target="sistemaNerviosoSection">Marcar como Normal</button>
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <!-- Nivel de Conciencia (Escala Glasgow) -->
@@ -1386,10 +1401,10 @@
             </div>
 
             <!-- Sección: Genitourinario / Tacto Rectal -->
-            <div class="p-6 bg-orange-50 rounded-xl shadow-md border border-orange-200">
+            <div id="genitourinarioSection" class="p-6 bg-orange-50 rounded-xl shadow-md border border-orange-200">
                 <h2 class="text-2xl font-semibold text-orange-800 mb-4 flex items-center justify-between">
                     Genitourinario / Tacto Rectal
-                    <button type="button" class="btn-normal" data-section="genitourinario">Marcar como Normal</button>
+                    <button type="button" class="btn-normal" data-section-target="genitourinarioSection">Marcar como Normal</button>
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
@@ -1494,6 +1509,12 @@
             normalButtons.forEach(button => {
                 button.classList.add('bg-gray-200', 'hover:bg-gray-300', 'text-gray-700', 'font-semibold', 'py-1', 'px-3', 'rounded-full', 'text-sm', 'transition', 'duration-200', 'ease-in-out');
             });
+            // Estilos para los botones "Normal X" (sub-secciones)
+            const normalSubButtons = document.querySelectorAll('.btn-normal-sub');
+            normalSubButtons.forEach(button => {
+                button.classList.add('bg-gray-100', 'hover:bg-gray-200', 'text-gray-600', 'font-semibold', 'py-0.5', 'px-2', 'rounded-full', 'text-xs', 'transition', 'duration-200', 'ease-in-out');
+            });
+
 
             // Función para ocultar/mostrar elementos basados en un checkbox/radio
             const setupToggleVisibility = () => {
@@ -1544,13 +1565,13 @@
                 });
             };
 
-            // Función para marcar una sección como "Normal"
+            // Función para marcar una sección o sub-sección como "Normal"
             const setupNormalButtons = () => {
-                const normalButtons = document.querySelectorAll('.btn-normal');
-                normalButtons.forEach(button => {
+                const allNormalButtons = document.querySelectorAll('.btn-normal, .btn-normal-sub'); // Seleccionar ambos tipos de botones
+                allNormalButtons.forEach(button => {
                     button.addEventListener('click', (event) => {
-                        const sectionId = event.target.dataset.section;
-                        const sectionElement = document.querySelector(`[data-section="${sectionId}"]`).closest('div'); // Encuentra el div padre de la sección
+                        const sectionId = event.target.dataset.sectionTarget; // Usar data-section-target
+                        const sectionElement = document.getElementById(sectionId); // Obtener el elemento por ID directamente
 
                         if (!sectionElement) return;
 
@@ -1562,7 +1583,7 @@
                             } else if (input.type === 'radio') {
                                 // Para radios, necesitamos una lógica que marque el "normal" o lo deseleccione todo
                                 // Se añadió 'normal' como un valor común para opciones por defecto de normalidad
-                                const normalValues = ['normal', 'conservado', 'ausente', 'noVisiblePalpable', 'sinAlteraciones', 'noDolorosos', 'normales', 'permeables', 'simetrico', 'activa', 'rosada', 'correcta', 'normopeso', 'alerta', 'presenteRitmicor', 'menor2seg', 'plano', 'noPalpable', 'presenteSimetrico', 'negativa', 'vacia'];
+                                const normalValues = ['normal', 'conservado', 'ausente', 'noVisiblePalpable', 'sinAlteraciones', 'noDolorosos', 'normales', 'permeables', 'simetrico', 'activa', 'rosada', 'correcta', 'normopeso', 'alerta', 'presenteRitmicor', 'menor2seg', 'plano', 'noPalpable', 'presenteSimetrico', 'negativa', 'vacia', 'permeable']; // Agregado 'permeable' para politrauma A
                                 if (normalValues.includes(input.value)) {
                                     input.checked = true; // Marcar la opción "Normal" si existe
                                 } else {
