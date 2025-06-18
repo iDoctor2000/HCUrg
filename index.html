@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exploración Física - Urgencias</title>
+    <!-- Carga de Tailwind CSS CDN para un estilo rápido y responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilo personalizado para la fuente Inter */
+        body {
+            font-family: 'Inter', sans-serif;
+            @apply bg-gray-100 text-gray-800;
+        }
+        /* Estilo para ocultar elementos inicialmente, controlados por JS */
+        .hidden-section {
+            display: none;
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-6 md:p-8 lg:p-10">
+    <div class="max-w-4xl mx-auto bg-white p-6 md:p-8 lg:p-10 rounded-xl shadow-lg border border-gray-200">
+        <h1 class="text-3xl sm:text-4xl font-bold text-center mb-8 text-blue-700">Exploración Física</h1>
+        <p class="text-center text-gray-600 mb-8">Completa el formulario de exploración física estructurada por órganos y aparatos.</p>
+
+        <form id="physicalExamForm" class="space-y-8">
+
+            <!-- Sección: Signos Vitales -->
+            <div class="p-6 bg-blue-50 rounded-xl shadow-md border border-blue-200">
+                <h2 class="text-2xl font-semibold text-blue-800 mb-4 flex items-center justify-between">
+                    Signos Vitales
+                    <button type="button" class="btn-normal" data-section="signosVitales">Marcar como Normal</button>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div>
+                        <label for="ta" class="block text-sm font-medium text-gray-700">Tensión Arterial (mmHg)</label>
+                        <input type="number" id="ta" name="ta" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2">
+                        <div class="mt-2">
+                            <label class="block text-sm font-medium text-gray-700">Posición</label>
+                            <div class="flex flex-wrap gap-2 mt-1">
+                                <label class="inline-flex items-center"><input type="radio" name="ta_posicion" value="sentado" class="form-radio text-blue-600 rounded-full"> <span class="ml-1 text-sm">Sentado</span></label>
+                                <label class="inline-flex items-center"><input type="radio" name="ta_posicion" value="decubito" class="form-radio text-blue-600 rounded-full"> <span class="ml-1 text-sm">Decúbito</span></label>
+                                <label class="inline-flex items-center"><input type="radio" name="ta_posicion" value="ortopnea" class="form-radio text-blue-600 rounded-full"> <span class="ml-1 text-sm">Ortopnea</span></label>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <label class="block text-sm font-medium text-gray-700">Brazo</label>
+                            <div class="flex flex-wrap gap-2 mt-1">
+                                <label class="inline-flex items-center"><input type="radio" name="ta_brazo" value="derecho" class="form-radio text-blue-600 rounded-full"> <span class="ml-1 text-sm">Derecho</span></label>
+                                <label class="inline-flex items-center"><input type="radio" name="ta_brazo" value="izquierdo" class="form-radio text-blue-600 rounded-full"> <span class="ml-1 text-sm">Izquierdo</span></label>
+                                <label class="inline-flex items-center"><input type="radio" name="ta_brazo" value="ambos" class="form-radio text-blue-600 rounded-full"> <span class="ml-1 text-sm">Ambos</span></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="fc" class="block text-sm font-medium text-gray-700">Frecuencia Cardíaca (lpm)</label>
+                        <input type="number" id="fc" name="fc" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2">
+                    </div>
+                    <div>
+                        <label for="fr" class="block text-sm font-medium text-gray-700">Frecuencia Respiratoria (rpm)</label>
+                        <input type="number" id="fr" name="fr" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2">
+                    </div>
+                    <div>
+                        <label for="temp" class="block text-sm font-medium text-gray-700">Temperatura (°C)</label>
+                        <input type="number" step="0.1" id="temp" name="temp" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2">
+                        <div class="mt-2">
+                            <label class="block text-sm font-medium text-gray-700">Localización</label>
+                            <div class="flex flex-wrap gap-2 mt-1">
+                                <label class="inline-flex items-center"><input type="radio" name="temp_localizacion" value="axilar" class="form-radio text-blue-600 rounded-full"> <span class="ml-1 text-sm">Axilar</span></label>
+                                <label class="inline-flex items-center"><input type="radio" name="temp_localizacion" value="oral" class="form-radio text-blue-600 rounded-full"> <span class="ml-1 text-sm">Oral</span></label>
+                                <label class="inline-flex items-center"><input type="radio" name="temp_localizacion" value="rectal" class="form-radio text-blue-600 rounded-full"> <span class="ml-1 text-sm">Rectal</span></label>
+                                <label class="inline-flex items-center"><input type="radio" name="temp_localizacion" value="timpanica" class="form-radio text-blue-600 rounded-full"> <span class="ml-1 text-sm">Timpánica</span></label>
+                                <label class="inline-flex items-center"><input type="radio" name="temp_localizacion" value="frontal" class="form-radio text-blue-600 rounded-full"> <span class="ml-1 text-sm">Frontal</span></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="sato2" class="block text-sm font-medium text-gray-700">Saturación de Oxígeno (%)</label>
+                        <input type="number" id="sato2" name="sato2" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2">
+                        <div class="mt-2">
+                            <label class="inline-flex items-center">
+                                <input type="checkbox" id="sato2_aporte" name="sato2_aporte" class="form-checkbox text-blue-600 rounded" data-toggle-target="sato2_tipo_aporte">
+                                <span class="ml-1 text-sm">Con aporte de O2</span>
+                            </label>
+                            <div id="sato2_tipo_aporte" class="mt-2 hidden-section">
+                                <label for="sato2_tipo" class="block text-sm font-medium text-gray-700">Tipo de aporte</label>
+                                <select id="sato2_tipo" name="sato2_tipo" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="gafasNasales">Gafas nasales</option>
+                                    <option value="mascarillaVenturi">Mascarilla Venturi</option>
+                                    <option value="mascarillaReservorio">Mascarilla con reservorio</option>
+                                    <option value="vni">Ventilación no invasiva</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="glucemia" class="block text-sm font-medium text-gray-700">Glucemia Capilar (mg/dL)</label>
+                        <input type="number" id="glucemia" name="glucemia" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Aspecto General -->
+            <div class="p-6 bg-green-50 rounded-xl shadow-md border border-green-200">
+                <h2 class="text-2xl font-semibold text-green-800 mb-4 flex items-center justify-between">
+                    Aspecto General
+                    <button type="button" class="btn-normal" data-section="aspectoGeneral">Marcar como Normal</button>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="conciencia" class="block text-sm font-medium text-gray-700">Nivel de Conciencia</label>
+                        <select id="conciencia" name="conciencia" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 p-2">
+                            <option value="">Selecciona...</option>
+                            <option value="alerta">Alerta</option>
+                            <option value="somnoliento">Somnoliento</option>
+                            <option value="confuso">Confuso</option>
+                            <option value="estuporoso">Estuporoso</option>
+                            <option value="comatoso">Comatoso</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Orientación</label>
+                        <div class="flex flex-wrap gap-2 mt-1">
+                            <label class="inline-flex items-center"><input type="radio" name="orientacion" value="orientado" class="form-radio text-green-600 rounded-full" data-toggle-target="orientacion_detalles" data-toggle-type="hide"> <span class="ml-1 text-sm">Orientado</span></label>
+                            <label class="inline-flex items-center"><input type="radio" name="orientacion" value="desorientado" class="form-radio text-green-600 rounded-full" data-toggle-target="orientacion_detalles" data-toggle-type="show"> <span class="ml-1 text-sm">Desorientado</span></label>
+                        </div>
+                        <div id="orientacion_detalles" class="mt-2 hidden-section">
+                            <label class="block text-sm font-medium text-gray-700">Si desorientado:</label>
+                            <div class="flex flex-wrap gap-2 mt-1">
+                                <label class="inline-flex items-center"><input type="checkbox" name="orientacion_tiempo" class="form-checkbox text-green-600 rounded"> <span class="ml-1 text-sm">Tiempo</span></label>
+                                <label class="inline-flex items-center"><input type="checkbox" name="orientacion_espacio" class="form-checkbox text-green-600 rounded"> <span class="ml-1 text-sm">Espacio</span></label>
+                                <label class="inline-flex items-center"><input type="checkbox" name="orientacion_persona" class="form-checkbox text-green-600 rounded"> <span class="ml-1 text-sm">Persona</span></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="nutricional" class="block text-sm font-medium text-gray-700">Estado Nutricional</label>
+                        <select id="nutricional" name="nutricional" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 p-2">
+                            <option value="">Selecciona...</option>
+                            <option value="normopeso">Normopeso</option>
+                            <option value="bajopeso">Bajo peso</option>
+                            <option value="sobrepeso">Sobrepeso</option>
+                            <option value="obesidad1">Obesidad I</option>
+                            <option value="obesidad2">Obesidad II</option>
+                            <option value="obesidadmorbida">Obesidad Mórbida</option>
+                            <option value="caquectico">Caquéctico</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="hidratacion" class="block text-sm font-medium text-gray-700">Hidratación</label>
+                        <select id="hidratacion" name="hidratacion" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 p-2">
+                            <option value="">Selecciona...</option>
+                            <option value="correcta">Correcta</option>
+                            <option value="levedeshidratado">Levemente deshidratado</option>
+                            <option value="moderadodeshidratado">Moderadamente deshidratado</option>
+                            <option value="severodeshidratado">Severamente deshidratado</option>
+                            <option value="edematoso">Edematoso</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="coloracion" class="block text-sm font-medium text-gray-700">Coloración Piel y Mucosas</label>
+                        <select id="coloracion" name="coloracion" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 p-2">
+                            <option value="">Selecciona...</option>
+                            <option value="rosada">Rosada</option>
+                            <option value="palida">Pálida</option>
+                            <option value="cianotica">Cianótica</option>
+                            <option value="icterica">Ictérica</option>
+                            <option value="rubicunda">Rubicunda</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="estadogeneral" class="block text-sm font-medium text-gray-700">Estado General</label>
+                        <select id="estadogeneral" name="estadogeneral" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 p-2">
+                            <option value="">Selecciona...</option>
+                            <option value="buenestado">Buen estado</option>
+                            <option value="regularestado">Regular estado</option>
+                            <option value="malestado">Mal estado</option>
+                            <option value="critico">Crítico</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="postura" class="block text-sm font-medium text-gray-700">Postura/Actitud</label>
+                        <select id="postura" name="postura" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 p-2">
+                            <option value="">Selecciona...</option>
+                            <option value="activa">Activa</option>
+                            <option value="decubitoForzado">Decúbito forzado</option>
+                            <option value="antalgica">Antálgica</option>
+                            <option value="posturaAnormal">Postura anormal</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Cabeza y Cuello -->
+            <div class="p-6 bg-red-50 rounded-xl shadow-md border border-red-200">
+                <h2 class="text-2xl font-semibold text-red-800 mb-4 flex items-center justify-between">
+                    Cabeza y Cuello
+                    <button type="button" class="btn-normal" data-section="cabezaCuello">Marcar como Normal</button>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Piel y Faneras -->
+                    <div class="col-span-full">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2">Piel y Faneras</h3>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="piel_lesiones_presentes" class="form-checkbox text-red-600 rounded" data-toggle-target="piel_lesiones_detalle">
+                            <span class="ml-1 text-sm">Lesiones presentes</span>
+                        </label>
+                        <div id="piel_lesiones_detalle" class="mt-2 hidden-section">
+                            <label for="piel_lesiones_tipo" class="block text-sm font-medium text-gray-700">Tipo de Lesiones</label>
+                            <select id="piel_lesiones_tipo" name="piel_lesiones_tipo" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 p-2">
+                                <option value="">Selecciona...</option>
+                                <option value="erupcion">Erupción</option>
+                                <option value="petequias">Petequias</option>
+                                <option value="equimosis">Equimosis</option>
+                                <option value="vesiculas">Vesículas</option>
+                                <option value="ampollas">Ampollas</option>
+                                <option value="cicatrices">Cicatrices</option>
+                                <option value="ulceras">Úlceras</option>
+                            </select>
+                            <label for="piel_lesiones_localizacion" class="block text-sm font-medium text-gray-700 mt-2">Localización (Opcional)</label>
+                            <input type="text" id="piel_lesiones_localizacion" name="piel_lesiones_localizacion" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 p-2" placeholder="Ej: Facial, Cervical">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="piel_turgencia" class="block text-sm font-medium text-gray-700">Turgencia</label>
+                        <select id="piel_turgencia" name="piel_turgencia" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 p-2">
+                            <option value="">Selecciona...</option>
+                            <option value="normal">Normal</option>
+                            <option value="disminuida">Disminuida</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="craneo" class="block text-sm font-medium text-gray-700">Craneo</label>
+                        <select id="craneo" name="craneo" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 p-2">
+                            <option value="">Selecciona...</option>
+                            <option value="normocefalo">Normocéfalo</option>
+                            <option value="microcefalia">Microcefalia</option>
+                            <option value="macrocefalia">Macrocefalia</option>
+                            <option value="traumatismos">Traumatismos</option>
+                        </select>
+                    </div>
+                    <!-- Ojos -->
+                    <div class="col-span-full">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2 mt-4">Ojos</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="ojos_pupilas" class="block text-sm font-medium text-gray-700">Pupilas</label>
+                                <select id="ojos_pupilas" name="ojos_pupilas" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="isocoricas">Isocóricas</option>
+                                    <option value="anisocoricas">Anisocóricas</option>
+                                    <option value="mioticas">Mióticas</option>
+                                    <option value="midriaticas">Midriáticas</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="ojos_fotomotor" class="block text-sm font-medium text-gray-700">Reflejo Fotomotor</label>
+                                <select id="ojos_fotomotor" name="ojos_fotomotor" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="presente">Presente</option>
+                                    <option value="ausente">Ausente</option>
+                                    <option value="disminuido">Disminuido</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="ojos_conjuntivas" class="block text-sm font-medium text-gray-700">Conjuntivas</label>
+                                <select id="ojos_conjuntivas" name="ojos_conjuntivas" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="rosadas">Rosadas</option>
+                                    <option value="palidas">Pálidas</option>
+                                    <option value="ictericas">Ictéricas</option>
+                                    <option value="hiperemicas">Hiperémicas</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="ojos_escleras" class="block text-sm font-medium text-gray-700">Escleras</label>
+                                <select id="ojos_escleras" name="ojos_escleras" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="blancas">Blancas</option>
+                                    <option value="ictericas">Ictéricas</option>
+                                    <option value="hiperemicas">Hiperémicas</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="ojos_motilidad" class="block text-sm font-medium text-gray-700">Motilidad Ocular Extrínseca</label>
+                                <select id="ojos_motilidad" name="ojos_motilidad" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 p-2" data-toggle-target="ojos_motilidad_detalle">
+                                    <option value="">Selecciona...</option>
+                                    <option value="normal">Normal</option>
+                                    <option value="alterada">Alterada</option>
+                                </select>
+                                <div id="ojos_motilidad_detalle" class="mt-2 hidden-section">
+                                    <label for="ojos_motilidad_tipo" class="block text-sm font-medium text-gray-700">Tipo de Alteración</label>
+                                    <select id="ojos_motilidad_tipo" name="ojos_motilidad_tipo" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 p-2">
+                                        <option value="">Selecciona...</option>
+                                        <option value="nistagmo">Nistagmo</option>
+                                        <option value="estrabismo">Estrabismo</option>
+                                        <option value="diplopia">Diplopía</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Oídos -->
+                    <div class="col-span-full">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2 mt-4">Oídos</h3>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" id="oidos_otoscopia_realizada" name="oidos_otoscopia_realizada" class="form-checkbox text-red-600 rounded">
+                            <span class="ml-1 text-sm">Otoscopia realizada</span>
+                        </label>
+                        <div class="mt-2">
+                            <label class="block text-sm font-medium text-gray-700">Resultado Otoscopia</label>
+                            <div class="flex flex-wrap gap-2 mt-1">
+                                <label class="inline-flex items-center"><input type="radio" name="oidos_otoscopia" value="normal" class="form-radio text-red-600 rounded-full" data-toggle-target="oidos_otoscopia_detalle" data-toggle-type="hide"> <span class="ml-1 text-sm">Normal</span></label>
+                                <label class="inline-flex items-center"><input type="radio" name="oidos_otoscopia" value="patologica" class="form-radio text-red-600 rounded-full" data-toggle-target="oidos_otoscopia_detalle" data-toggle-type="show"> <span class="ml-1 text-sm">Patológica</span></label>
+                            </div>
+                            <div id="oidos_otoscopia_detalle" class="mt-2 hidden-section">
+                                <label for="oidos_otoscopia_tipo" class="block text-sm font-medium text-gray-700">Tipo de Patología</label>
+                                <select id="oidos_otoscopia_tipo" name="oidos_otoscopia_tipo" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="otitisExterna">Otitis externa</option>
+                                    <option value="otitisMedia">Otitis media</option>
+                                    <option value="taponCerumen">Tapón de cerumen</option>
+                                    <option value="otorrea">Otorrea</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Nariz -->
+                    <div class="col-span-full">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2 mt-4">Nariz</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="nariz_fosas" class="block text-sm font-medium text-gray-700">Fosas Nasales</label>
+                                <select id="nariz_fosas" name="nariz_fosas" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="permeables">Permeables</option>
+                                    <option value="obstruidas">Obstruidas</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="inline-flex items-center mt-6 md:mt-1">
+                                    <input type="checkbox" name="nariz_aleteo" class="form-checkbox text-red-600 rounded">
+                                    <span class="ml-1 text-sm">Aleteo Nasal</span>
+                                </label>
+                                <label class="inline-flex items-center ml-4 mt-6 md:mt-1">
+                                    <input type="checkbox" name="nariz_epistaxis" class="form-checkbox text-red-600 rounded">
+                                    <span class="ml-1 text-sm">Epistaxis</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Boca y Faringe -->
+                    <div class="col-span-full">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2 mt-4">Boca y Faringe</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="boca_mucosas" class="block text-sm font-medium text-gray-700">Mucosas Orales</label>
+                                <select id="boca_mucosas" name="boca_mucosas" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="humedas">Húmedas</option>
+                                    <option value="secas">Secas</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="boca_lengua" class="block text-sm font-medium text-gray-700">Lengua</label>
+                                <select id="boca_lengua" name="boca_lengua" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="normoglosa">Normoglosa</option>
+                                    <option value="saburral">Saburral</option>
+                                    <option value="fisurada">Fisurada</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="boca_amigdalas" class="block text-sm font-medium text-gray-700">Amígdalas</label>
+                                <select id="boca_amigdalas" name="boca_amigdalas" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="noVisibles">No visibles</option>
+                                    <option value="normales">Normales</option>
+                                    <option value="hipertroficas">Hipertróficas</option>
+                                    <option value="exudados">Exudados</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="boca_faringe" class="block text-sm font-medium text-gray-700">Faringe</label>
+                                <select id="boca_faringe" name="boca_faringe" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="noCongestiva">No congestiva</option>
+                                    <option value="congestiva">Congestiva</option>
+                                    <option value="exudados">Exudados</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Cuello -->
+                    <div class="col-span-full">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2 mt-4">Cuello</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="cuello_movilidad" class="block text-sm font-medium text-gray-700">Movilidad</label>
+                                <select id="cuello_movilidad" name="cuello_movilidad" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="normal">Normal</option>
+                                    <option value="limitada">Limitada</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="cuello_adenopatias_presentes" class="form-checkbox text-red-600 rounded" data-toggle-target="cuello_adenopatias_detalle">
+                                    <span class="ml-1 text-sm">Adenopatías presentes</span>
+                                </label>
+                                <div id="cuello_adenopatias_detalle" class="mt-2 hidden-section">
+                                    <input type="text" name="cuello_adenopatias_localizacion" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 p-2" placeholder="Localización y tamaño">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="inline-flex items-center mt-1">
+                                    <input type="checkbox" name="cuello_iy" class="form-checkbox text-red-600 rounded">
+                                    <span class="ml-1 text-sm">Ingurgitación Yugular</span>
+                                </label>
+                            </div>
+                            <div>
+                                <label for="cuello_tiroides" class="block text-sm font-medium text-gray-700">Tiroides</label>
+                                <select id="cuello_tiroides" name="cuello_tiroides" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="noPalpable">No palpable</option>
+                                    <option value="palpableNoAumentada">Palpable no aumentada</option>
+                                    <option value="bocio">Bocio</option>
+                                    <option value="nodulo">Nódulo</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="cuello_pulso_carotideo" class="block text-sm font-medium text-gray-700">Pulso Carotídeo</label>
+                                <select id="cuello_pulso_carotideo" name="cuello_pulso_carotideo" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="presenteSimetrico">Presente y simétrico</option>
+                                    <option value="asimetrico">Asimétrico</option>
+                                    <option value="disminuido">Disminuido</option>
+                                    <option value="ausente">Ausente</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Tórax -->
+            <div class="p-6 bg-purple-50 rounded-xl shadow-md border border-purple-200">
+                <h2 class="text-2xl font-semibold text-purple-800 mb-4 flex items-center justify-between">
+                    Tórax
+                    <button type="button" class="btn-normal" data-section="torax">Marcar como Normal</button>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Inspección -->
+                    <div class="col-span-full">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2">Inspección</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="torax_forma" class="block text-sm font-medium text-gray-700">Forma</label>
+                                <select id="torax_forma" name="torax_forma" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="simetrico">Simétrico</option>
+                                    <option value="asimetrico">Asimétrico</option>
+                                    <option value="entone">En tonel</option>
+                                    <option value="pectusExcavatum">Pectus excavatum</option>
+                                    <option value="pectusCarinatum">Pectus carinatum</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="inline-flex items-center mt-6 md:mt-1">
+                                    <input type="checkbox" name="torax_deformidades" class="form-checkbox text-purple-600 rounded">
+                                    <span class="ml-1 text-sm">Deformidades</span>
+                                </label>
+                                <label class="inline-flex items-center ml-4 mt-6 md:mt-1">
+                                    <input type="checkbox" name="torax_cicatrices" class="form-checkbox text-purple-600 rounded">
+                                    <span class="ml-1 text-sm">Cicatrices</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Palpación -->
+                    <div class="col-span-full">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2 mt-4">Palpación</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="torax_expansion" class="block text-sm font-medium text-gray-700">Expansión Torácica</label>
+                                <select id="torax_expansion" name="torax_expansion" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="simetrica">Simétrica</option>
+                                    <option value="asimetrica">Asimétrica</option>
+                                    <option value="disminuida">Disminuida</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="torax_fremito" class="block text-sm font-medium text-gray-700">Frémito Táctil</label>
+                                <select id="torax_fremito" name="torax_fremito" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="normal">Normal</option>
+                                    <option value="aumentado">Aumentado</option>
+                                    <option value="disminuido">Disminuido</option>
+                                    <option value="ausente">Ausente</option>
+                                </select>
+                            </div>
+                            <div class="col-span-full">
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="torax_palpacion_dolor" class="form-checkbox text-purple-600 rounded">
+                                    <span class="ml-1 text-sm">Dolor a la palpación</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Percusión -->
+                    <div class="col-span-full">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2 mt-4">Percusión</h3>
+                        <div>
+                            <label for="torax_percusion_sonoridad" class="block text-sm font-medium text-gray-700">Sonoridad</label>
+                            <select id="torax_percusion_sonoridad" name="torax_percusion_sonoridad" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500 p-2">
+                                <option value="">Selecciona...</option>
+                                <option value="resonante">Resonante</option>
+                                <option value="matidez">Matidez</option>
+                                <option value="timpanismo">Timpanismo</option>
+                                <option value="hipersonoridad">Hipersonoridad</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Auscultación Pulmonar -->
+                    <div class="col-span-full">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2 mt-4">Auscultación Pulmonar</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="torax_mv" class="block text-sm font-medium text-gray-700">Murmullo Vesicular</label>
+                                <select id="torax_mv" name="torax_mv" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-purple-500 focus:ring-purple-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="conservado">Conservado</option>
+                                    <option value="disminuido">Disminuido</option>
+                                    <option value="abolido">Abolido</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="torax_ruidos_adventicios_presentes" class="form-checkbox text-purple-600 rounded" data-toggle-target="torax_ruidos_adventicios_detalle">
+                                    <span class="ml-1 text-sm">Ruidos Adventicios presentes</span>
+                                </label>
+                                <div id="torax_ruidos_adventicios_detalle" class="mt-2 hidden-section">
+                                    <label class="block text-sm font-medium text-gray-700">Tipo de Ruidos Adventicios</label>
+                                    <div class="flex flex-wrap gap-2 mt-1">
+                                        <label class="inline-flex items-center"><input type="checkbox" name="torax_adventicios_roncus" class="form-checkbox text-purple-600 rounded"> <span class="ml-1 text-sm">Roncus</span></label>
+                                        <label class="inline-flex items-center"><input type="checkbox" name="torax_adventicios_sibilancias" class="form-checkbox text-purple-600 rounded"> <span class="ml-1 text-sm">Sibilancias</span></label>
+                                        <label class="inline-flex items-center"><input type="checkbox" name="torax_adventicios_crepitantesFinos" class="form-checkbox text-purple-600 rounded"> <span class="ml-1 text-sm">Crepitantes finos</span></label>
+                                        <label class="inline-flex items-center"><input type="checkbox" name="torax_adventicios_crepitantesGruesos" class="form-checkbox text-purple-600 rounded"> <span class="ml-1 text-sm">Crepitantes gruesos</span></label>
+                                        <label class="inline-flex items-center"><input type="checkbox" name="torax_adventicios_estridor" class="form-checkbox text-purple-600 rounded"> <span class="ml-1 text-sm">Estridor</span></label>
+                                        <label class="inline-flex items-center"><input type="checkbox" name="torax_adventicios_rocePleural" class="form-checkbox text-purple-600 rounded"> <span class="ml-1 text-sm">Roce pleural</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Simetría</label>
+                                <div class="flex flex-wrap gap-2 mt-1">
+                                    <label class="inline-flex items-center"><input type="radio" name="torax_simetria" value="simetrico" class="form-radio text-purple-600 rounded-full"> <span class="ml-1 text-sm">Simétrico</span></label>
+                                    <label class="inline-flex items-center"><input type="radio" name="torax_simetria" value="asimetrico" class="form-radio text-purple-600 rounded-full"> <span class="ml-1 text-sm">Asimétrico</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Cardiovascular -->
+            <div class="p-6 bg-teal-50 rounded-xl shadow-md border border-teal-200">
+                <h2 class="text-2xl font-semibold text-teal-800 mb-4 flex items-center justify-between">
+                    Cardiovascular
+                    <button type="button" class="btn-normal" data-section="cardiovascular">Marcar como Normal</button>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Inspección y Palpación -->
+                    <div class="col-span-full">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2">Inspección y Palpación</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="cardio_choquePunta" class="block text-sm font-medium text-gray-700">Choque de Punta</label>
+                                <select id="cardio_choquePunta" name="cardio_choquePunta" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="noVisiblePalpable">No visible/palpable</option>
+                                    <option value="5eiclmci">Palpable en 5º EIC LMCI</option>
+                                    <option value="desplazado">Desplazado</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="inline-flex items-center mt-6 md:mt-1">
+                                    <input type="checkbox" name="cardio_fremitos" class="form-checkbox text-teal-600 rounded">
+                                    <span class="ml-1 text-sm">Frémitos presentes</span>
+                                </label>
+                            </div>
+                            <div class="col-span-full">
+                                <h4 class="text-md font-medium text-gray-700 mt-2 mb-2">Pulsos Periféricos</h4>
+                                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+                                    <div>
+                                        <label for="pulso_radial" class="block text-sm font-medium text-gray-700">Radial</label>
+                                        <select id="pulso_radial" name="pulso_radial" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 p-2">
+                                            <option value="">Selecciona...</option>
+                                            <option value="presenteSimetrico">Presente y simétrico</option>
+                                            <option value="disminuido">Disminuido</option>
+                                            <option value="ausente">Ausente</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="pulso_femoral" class="block text-sm font-medium text-gray-700">Femoral</label>
+                                        <select id="pulso_femoral" name="pulso_femoral" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 p-2">
+                                            <option value="">Selecciona...</option>
+                                            <option value="presenteSimetrico">Presente y simétrico</option>
+                                            <option value="disminuido">Disminuido</option>
+                                            <option value="ausente">Ausente</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="pulso_pedio" class="block text-sm font-medium text-gray-700">Pedio</label>
+                                        <select id="pulso_pedio" name="pulso_pedio" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 p-2">
+                                            <option value="">Selecciona...</option>
+                                            <option value="presenteSimetrico">Presente y simétrico</option>
+                                            <option value="disminuido">Disminuido</option>
+                                            <option value="ausente">Ausente</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Auscultación Cardíaca -->
+                    <div class="col-span-full">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2 mt-4">Auscultación Cardíaca</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="cardio_ritmo" class="block text-sm font-medium text-gray-700">Ruidos Cardíacos (RC)</label>
+                                <select id="cardio_ritmo" name="cardio_ritmo" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="ritmicos">Rítmicos</option>
+                                    <option value="arritmicos">Arrítmicos</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="cardio_tonos" class="block text-sm font-medium text-gray-700">Tonos</label>
+                                <select id="cardio_tonos" name="cardio_tonos" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="normales">Normales</option>
+                                    <option value="velados">Velados</option>
+                                    <option value="aumentados">Aumentados</option>
+                                </select>
+                            </div>
+                            <div class="col-span-full">
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="cardio_soplos_presentes" class="form-checkbox text-teal-600 rounded" data-toggle-target="cardio_soplos_detalle">
+                                    <span class="ml-1 text-sm">Soplos presentes</span>
+                                </label>
+                                <div id="cardio_soplos_detalle" class="mt-2 hidden-section">
+                                    <label for="cardio_soplos_foco" class="block text-sm font-medium text-gray-700">Foco del Soplo</label>
+                                    <select id="cardio_soplos_foco" name="cardio_soplos_foco" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 p-2">
+                                        <option value="">Selecciona...</option>
+                                        <option value="aortico">Aórtico</option>
+                                        <option value="pulmonar">Pulmonar</option>
+                                        <option value="tricuspide">Tricúspide</option>
+                                        <option value="mitral">Mitral</option>
+                                        <option value="pansistolico">Pansistólico</option>
+                                        <option value="diastolico">Diastólico</option>
+                                        <option value="sistolico">Sistólico</option>
+                                    </select>
+                                    <input type="text" name="cardio_soplos_irradiacion_grado" class="mt-2 block w-full rounded-md border-gray-300 shadow-sm focus:border-teal-500 focus:ring-teal-500 p-2" placeholder="Irradiación y Grado (Ej: Axila, II/VI)">
+                                </div>
+                            </div>
+                            <div class="col-span-full">
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="cardio_roces" class="form-checkbox text-teal-600 rounded">
+                                    <span class="ml-1 text-sm">Roces presentes</span>
+                                </label>
+                                <label class="inline-flex items-center ml-4">
+                                    <input type="checkbox" name="cardio_r3" class="form-checkbox text-teal-600 rounded">
+                                    <span class="ml-1 text-sm">Tercer Ruido (R3)</span>
+                                </label>
+                                <label class="inline-flex items-center ml-4">
+                                    <input type="checkbox" name="cardio_r4" class="form-checkbox text-teal-600 rounded">
+                                    <span class="ml-1 text-sm">Cuarto Ruido (R4)</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Abdomen -->
+            <div class="p-6 bg-yellow-50 rounded-xl shadow-md border border-yellow-200">
+                <h2 class="text-2xl font-semibold text-yellow-800 mb-4 flex items-center justify-between">
+                    Abdomen
+                    <button type="button" class="btn-normal" data-section="abdomen">Marcar como Normal</button>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Inspección -->
+                    <div class="col-span-full">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2">Inspección</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="abdomen_forma" class="block text-sm font-medium text-gray-700">Forma</label>
+                                <select id="abdomen_forma" name="abdomen_forma" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-yellow-500 focus:ring-yellow-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="plano">Plano</option>
+                                    <option value="distendido">Distendido</option>
+                                    <option value="globuloso">Globuloso</option>
+                                    <option value="escavado">Escavado</option>
+                                    <option value="abombado">Abombado</option>
+                                </select>
+                            </div>
+                            <div class="flex items-center flex-wrap gap-x-4">
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="abdomen_cicatrices" class="form-checkbox text-yellow-600 rounded">
+                                    <span class="ml-1 text-sm">Cicatrices</span>
+                                </label>
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="abdomen_hernias" class="form-checkbox text-yellow-600 rounded">
+                                    <span class="ml-1 text-sm">Hernias</span>
+                                </label>
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="abdomen_circulacion_colateral" class="form-checkbox text-yellow-600 rounded">
+                                    <span class="ml-1 text-sm">Circulación colateral</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Auscultación -->
+                    <div class="col-span-full">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2 mt-4">Auscultación</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="abdomen_rha" class="block text-sm font-medium text-gray-700">Ruidos Hidroaéreos (RHA)</label>
+                                <select id="abdomen_rha" name="abdomen_rha" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-yellow-500 focus:ring-yellow-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="normales">Normales</option>
+                                    <option value="aumentados">Aumentados</option>
+                                    <option value="disminuidos">Disminuidos</option>
+                                    <option value="ausentes">Ausentes</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="inline-flex items-center mt-6 md:mt-1">
+                                    <input type="checkbox" name="abdomen_soplos_presentes" class="form-checkbox text-yellow-600 rounded">
+                                    <span class="ml-1 text-sm">Soplos presentes</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Percusión -->
+                    <div class="col-span-full">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2 mt-4">Percusión</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="abdomen_percusion_sonoridad" class="block text-sm font-medium text-gray-700">Sonoridad</label>
+                                <select id="abdomen_percusion_sonoridad" name="abdomen_percusion_sonoridad" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-yellow-500 focus:ring-yellow-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="timpanismoGeneralizado">Timpanismo generalizado</option>
+                                    <option value="matidez">Matidez</option>
+                                    <option value="ascitis">Ascitis</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="inline-flex items-center mt-6 md:mt-1">
+                                    <input type="checkbox" name="abdomen_matidez_cambiante" class="form-checkbox text-yellow-600 rounded">
+                                    <span class="ml-1 text-sm">Matidez Cambiante</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Palpación -->
+                    <div class="col-span-full">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2 mt-4">Palpación</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">Blando/Depresible</label>
+                                <div class="flex flex-wrap gap-2 mt-1">
+                                    <label class="inline-flex items-center"><input type="radio" name="abdomen_blando_depresible" value="si" class="form-radio text-yellow-600 rounded-full"> <span class="ml-1 text-sm">Sí</span></label>
+                                    <label class="inline-flex items-center"><input type="radio" name="abdomen_blando_depresible" value="no" class="form-radio text-yellow-600 rounded-full"> <span class="ml-1 text-sm">No</span></label>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="abdomen_dolor_palpacion_presente" class="form-checkbox text-yellow-600 rounded" data-toggle-target="abdomen_dolor_detalle">
+                                    <span class="ml-1 text-sm">Dolor a la Palpación</span>
+                                </label>
+                                <div id="abdomen_dolor_detalle" class="mt-2 hidden-section">
+                                    <label for="abdomen_dolor_localizacion" class="block text-sm font-medium text-gray-700">Localización del Dolor</label>
+                                    <select id="abdomen_dolor_localizacion" name="abdomen_dolor_localizacion" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-yellow-500 focus:ring-yellow-500 p-2">
+                                        <option value="">Selecciona...</option>
+                                        <option value="cid">CID</option>
+                                        <option value="cie">CIE</option>
+                                        <option value="csi">CSI</option>
+                                        <option value="cso">CSO</option>
+                                        <option value="periumbilical">Periumbilical</option>
+                                        <option value="epigastrio">Epigastrio</option>
+                                        <option value="hipogastrio">Hipogastrio</option>
+                                        <option value="generalizado">Generalizado</option>
+                                    </select>
+                                    <label for="abdomen_dolor_tipo" class="block text-sm font-medium text-gray-700 mt-2">Tipo de Dolor</label>
+                                    <select id="abdomen_dolor_tipo" name="abdomen_dolor_tipo" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-yellow-500 focus:ring-yellow-500 p-2">
+                                        <option value="">Selecciona...</option>
+                                        <option value="superficial">Superficial</option>
+                                        <option value="profundo">Profundo</option>
+                                        <option value="rebotante">Rebotante</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="abdomen_defensa" class="block text-sm font-medium text-gray-700">Defensa Muscular</label>
+                                <select id="abdomen_defensa" name="abdomen_defensa" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-yellow-500 focus:ring-yellow-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="ausente">Ausente</option>
+                                    <option value="voluntaria">Voluntaria</option>
+                                    <option value="involuntaria">Involuntaria</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="abdomen_masa_palpable_presente" class="form-checkbox text-yellow-600 rounded" data-toggle-target="abdomen_masa_detalle">
+                                    <span class="ml-1 text-sm">Masa palpable presente</span>
+                                </label>
+                                <div id="abdomen_masa_detalle" class="mt-2 hidden-section">
+                                    <input type="text" name="abdomen_masa_descripcion" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-yellow-500 focus:ring-yellow-500 p-2" placeholder="Localización, tamaño, consistencia, movilidad">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="abdomen_hepatomegalia" class="form-checkbox text-yellow-600 rounded" data-toggle-target="abdomen_hepatomegalia_detalle">
+                                    <span class="ml-1 text-sm">Hepatomegalia</span>
+                                </label>
+                                <div id="abdomen_hepatomegalia_detalle" class="mt-2 hidden-section">
+                                    <input type="text" name="abdomen_hepatomegalia_cm" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-yellow-500 focus:ring-yellow-500 p-2" placeholder="cm bajo reborde costal">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="inline-flex items-center">
+                                    <input type="checkbox" name="abdomen_esplenomegalia" class="form-checkbox text-yellow-600 rounded">
+                                    <span class="ml-1 text-sm">Esplenomegalia</span>
+                                </label>
+                            </div>
+                            <div class="col-span-full">
+                                <h4 class="text-md font-medium text-gray-700 mt-2 mb-2">Signos Peritoneales</h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <label class="inline-flex items-center"><input type="checkbox" name="signo_blumberg" class="form-checkbox text-yellow-600 rounded"> <span class="ml-1 text-sm">Blumberg</span></label>
+                                    <label class="inline-flex items-center"><input type="checkbox" name="signo_murphy" class="form-checkbox text-yellow-600 rounded"> <span class="ml-1 text-sm">Murphy</span></label>
+                                    <label class="inline-flex items-center"><input type="checkbox" name="signo_rovsing" class="form-checkbox text-yellow-600 rounded"> <span class="ml-1 text-sm">Rovsing</span></label>
+                                    <label class="inline-flex items-center"><input type="checkbox" name="signo_psoas" class="form-checkbox text-yellow-600 rounded"> <span class="ml-1 text-sm">Psoas</span></label>
+                                    <label class="inline-flex items-center"><input type="checkbox" name="signo_obturador" class="form-checkbox text-yellow-600 rounded"> <span class="ml-1 text-sm">Obturador</span></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Extremidades -->
+            <div class="p-6 bg-indigo-50 rounded-xl shadow-md border border-indigo-200">
+                <h2 class="text-2xl font-semibold text-indigo-800 mb-4 flex items-center justify-between">
+                    Extremidades
+                    <button type="button" class="btn-normal" data-section="extremidades">Marcar como Normal</button>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="ext_coloracion" class="block text-sm font-medium text-gray-700">Coloración</label>
+                        <select id="ext_coloracion" name="ext_coloracion" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2">
+                            <option value="">Selecciona...</option>
+                            <option value="rosada">Rosada</option>
+                            <option value="palida">Pálida</option>
+                            <option value="cianotica">Cianótica</option>
+                            <option value="eritematosa">Eritematosa</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="ext_temperatura" class="block text-sm font-medium text-gray-700">Temperatura</label>
+                        <select id="ext_temperatura" name="ext_temperatura" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2">
+                            <option value="">Selecciona...</option>
+                            <option value="normal">Normal</option>
+                            <option value="caliente">Caliente</option>
+                            <option value="fria">Fría</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="ext_edemas_presentes" class="form-checkbox text-indigo-600 rounded" data-toggle-target="ext_edemas_detalle">
+                            <span class="ml-1 text-sm">Edemas presentes</span>
+                        </label>
+                        <div id="ext_edemas_detalle" class="mt-2 hidden-section">
+                            <label for="ext_edemas_localizacion" class="block text-sm font-medium text-gray-700">Localización del Edema</label>
+                            <select id="ext_edemas_localizacion" name="ext_edemas_localizacion" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2">
+                                <option value="">Selecciona...</option>
+                                <option value="miembrosInferiores">Miembros Inferiores</option>
+                                <option value="miembrosSuperiores">Miembros Superiores</option>
+                                <option value="generalizado">Generalizado</option>
+                            </select>
+                            <label for="ext_edemas_tipo" class="block text-sm font-medium text-gray-700 mt-2">Tipo de Edema</label>
+                            <select id="ext_edemas_tipo" name="ext_edemas_tipo" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2">
+                                <option value="">Selecciona...</option>
+                                <option value="godetPositivo">Godet positivo</option>
+                                <option value="godetNegativo">Godet negativo</option>
+                            </select>
+                            <label for="ext_edemas_grado" class="block text-sm font-medium text-gray-700 mt-2">Grado de Edema (+/++++):</label>
+                            <input type="number" id="ext_edemas_grado" name="ext_edemas_grado" min="1" max="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="inline-flex items-center mt-1">
+                            <input type="checkbox" name="ext_varices" class="form-checkbox text-indigo-600 rounded">
+                            <span class="ml-1 text-sm">Varices</span>
+                        </label>
+                    </div>
+                    <div>
+                        <label for="ext_movilidad" class="block text-sm font-medium text-gray-700">Movilidad</label>
+                        <select id="ext_movilidad" name="ext_movilidad" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2">
+                            <option value="">Selecciona...</option>
+                            <option value="activaConservada">Activa conservada</option>
+                            <option value="limitada">Limitada</option>
+                            <option value="ausente">Ausente</option>
+                        </select>
+                    </div>
+                    <div class="col-span-full">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2 mt-4">Fuerza Muscular (Escala Daniels)</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div>
+                                <label for="fuerza_msd" class="block text-sm font-medium text-gray-700">MSD</label>
+                                <select id="fuerza_msd" name="fuerza_msd" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2">
+                                    <option value="">N/A</option>
+                                    <option value="5">5/5</option><option value="4">4/5</option><option value="3">3/5</option><option value="2">2/5</option><option value="1">1/5</option><option value="0">0/5</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="fuerza_msi" class="block text-sm font-medium text-gray-700">MSI</label>
+                                <select id="fuerza_msi" name="fuerza_msi" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2">
+                                    <option value="">N/A</option>
+                                    <option value="5">5/5</option><option value="4">4/5</option><option value="3">3/5</option><option value="2">2/5</option><option value="1">1/5</option><option value="0">0/5</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="fuerza_mid" class="block text-sm font-medium text-gray-700">MID</label>
+                                <select id="fuerza_mid" name="fuerza_mid" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2">
+                                    <option value="">N/A</option>
+                                    <option value="5">5/5</option><option value="4">4/5</option><option value="3">3/5</option><option value="2">2/5</option><option value="1">1/5</option><option value="0">0/5</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="fuerza_mii" class="block text-sm font-medium text-gray-700">MII</label>
+                                <select id="fuerza_mii" name="fuerza_mii" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2">
+                                    <option value="">N/A</option>
+                                    <option value="5">5/5</option><option value="4">4/5</option><option value="3">3/5</option><option value="2">2/5</option><option value="1">1/5</option><option value="0">0/5</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="ext_sensibilidad" class="block text-sm font-medium text-gray-700">Sensibilidad</label>
+                        <select id="ext_sensibilidad" name="ext_sensibilidad" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2">
+                            <option value="">Selecciona...</option>
+                            <option value="conservada">Conservada</option>
+                            <option value="hipoestesia">Hipoestesia</option>
+                            <option value="anestesia">Anestesia</option>
+                            <option value="parestesias">Parestesias</option>
+                        </select>
+                    </div>
+                    <div class="col-span-full">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2 mt-4">Reflejos Osteotendinosos (ROT)</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div>
+                                <label for="rot_bicipital" class="block text-sm font-medium text-gray-700">Bicipital</label>
+                                <select id="rot_bicipital" name="rot_bicipital" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2">
+                                    <option value="">N/A</option>
+                                    <option value="normal">Normal</option><option value="hiporreflexia">Hiporreflexia</option><option value="arreflexia">Arreflexia</option><option value="hiperreflexia">Hiperreflexia</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="rot_rotuliano" class="block text-sm font-medium text-gray-700">Rotuliano</label>
+                                <select id="rot_rotuliano" name="rot_rotuliano" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2">
+                                    <option value="">N/A</option>
+                                    <option value="normal">Normal</option><option value="hiporreflexia">Hiporreflexia</option><option value="arreflexia">Arreflexia</option><option value="hiperreflexia">Hiperreflexia</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="rot_aquileo" class="block text-sm font-medium text-gray-700">Aquíleo</label>
+                                <select id="rot_aquileo" name="rot_aquileo" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2">
+                                    <option value="">N/A</option>
+                                    <option value="normal">Normal</option><option value="hiporreflexia">Hiporreflexia</option><option value="arreflexia">Arreflexia</option><option value="hiperreflexia">Hiperreflexia</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="ext_trofismo" class="block text-sm font-medium text-gray-700">Trofismo</label>
+                        <select id="ext_trofismo" name="ext_trofismo" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 p-2">
+                            <option value="">Selecciona...</option>
+                            <option value="conservado">Conservado</option>
+                            <option value="atrofia">Atrofia</option>
+                            <option value="hipertrofia">Hipertrofia</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Sistema Nervioso -->
+            <div class="p-6 bg-pink-50 rounded-xl shadow-md border border-pink-200">
+                <h2 class="text-2xl font-semibold text-pink-800 mb-4 flex items-center justify-between">
+                    Sistema Nervioso
+                    <button type="button" class="btn-normal" data-section="sistemaNervioso">Marcar como Normal</button>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Nivel de Conciencia (Escala Glasgow) -->
+                    <div class="col-span-full">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2">Nivel de Conciencia (Escala Glasgow)</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div>
+                                <label for="glasgow_ocular" class="block text-sm font-medium text-gray-700">Apertura Ocular</label>
+                                <input type="number" id="glasgow_ocular" name="glasgow_ocular" min="1" max="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 p-2">
+                            </div>
+                            <div>
+                                <label for="glasgow_verbal" class="block text-sm font-medium text-gray-700">Respuesta Verbal</label>
+                                <input type="number" id="glasgow_verbal" name="glasgow_verbal" min="1" max="5" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 p-2">
+                            </div>
+                            <div>
+                                <label for="glasgow_motora" class="block text-sm font-medium text-gray-700">Respuesta Motora</label>
+                                <input type="number" id="glasgow_motora" name="glasgow_motora" min="1" max="6" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 p-2">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Pares Craneales -->
+                    <div class="col-span-full">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2 mt-4">Pares Craneales</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="pc_olfatorio" class="block text-sm font-medium text-gray-700">Olfatorio (I)</label>
+                                <select id="pc_olfatorio" name="pc_olfatorio" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="normal">Normal</option>
+                                    <option value="anosmia">Anosmia</option>
+                                    <option value="hiposmia">Hiposmia</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="pc_optico" class="block text-sm font-medium text-gray-700">Óptico (II)</label>
+                                <select id="pc_optico" name="pc_optico" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="normal">Visión normal</option>
+                                    <option value="bajavision">Baja visión</option>
+                                    <option value="ceguera">Ceguera</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="pc_oculomotor" class="block text-sm font-medium text-gray-700">Oculomotor (III), Troclear (IV), Abducens (VI)</label>
+                                <select id="pc_oculomotor" name="pc_oculomotor" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="normal">Motilidad extrínseca normal</option>
+                                    <option value="diplopia">Diplopía</option>
+                                    <option value="estrabismo">Estrabismo</option>
+                                    <option value="nistagmo">Nistagmo</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="pc_trigemino" class="block text-sm font-medium text-gray-700">Trigémino (V)</label>
+                                <select id="pc_trigemino" name="pc_trigemino" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="normal">Sensibilidad facial normal</option>
+                                    <option value="hipoestesia">Hipoestesia</option>
+                                    <option value="anestesia">Anestesia</option>
+                                    <option value="dolor">Dolor</option>
+                                </select>
+                                <label class="inline-flex items-center mt-2">
+                                    <input type="checkbox" name="pc_trigemino_corneal" class="form-checkbox text-pink-600 rounded">
+                                    <span class="ml-1 text-sm">Reflejo Corneal presente</span>
+                                </label>
+                            </div>
+                            <div>
+                                <label for="pc_facial" class="block text-sm font-medium text-gray-700">Facial (VII)</label>
+                                <select id="pc_facial" name="pc_facial" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="normal">Simetría facial normal</option>
+                                    <option value="paresia">Paresia</option>
+                                    <option value="paralisis">Parálisis</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="pc_vestibulococlear" class="block text-sm font-medium text-gray-700">Vestibulococlear (VIII)</label>
+                                <select id="pc_vestibulococlear" name="pc_vestibulococlear" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="normal">Audición normal</option>
+                                    <option value="hipoacusia">Hipoacusia</option>
+                                    <option value="sordera">Sordera</option>
+                                    <option value="vertigo">Vértigo</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="pc_glosofaringeo" class="block text-sm font-medium text-gray-700">Glosofaríngeo (IX), Vago (X)</label>
+                                <select id="pc_glosofaringeo" name="pc_glosofaringeo" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="normal">Deglución normal</option>
+                                    <option value="disfagia">Disfagia</option>
+                                    <option value="disfonia">Disfonía</option>
+                                </select>
+                                <label class="inline-flex items-center mt-2">
+                                    <input type="checkbox" name="pc_glosofaringeo_nauseoso" class="form-checkbox text-pink-600 rounded">
+                                    <span class="ml-1 text-sm">Reflejo Nauseoso presente</span>
+                                </label>
+                            </div>
+                            <div>
+                                <label for="pc_accesorio" class="block text-sm font-medium text-gray-700">Accesorio (XI)</label>
+                                <select id="pc_accesorio" name="pc_accesorio" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="normal">Fuerza ECOM y trapecio normal</option>
+                                    <option value="debilidad">Debilidad</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="pc_hipogloso" class="block text-sm font-medium text-gray-700">Hipogloso (XII)</label>
+                                <select id="pc_hipogloso" name="pc_hipogloso" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="normal">Movilidad lingual normal</option>
+                                    <option value="desviacion">Desviación</option>
+                                    <option value="atrofia">Atrofia</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Coordinación -->
+                    <div class="col-span-full">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2 mt-4">Coordinación</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="coordinacion_general" class="block text-sm font-medium text-gray-700">General</label>
+                                <select id="coordinacion_general" name="coordinacion_general" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="normal">Normal</option>
+                                    <option value="dismetría">Dismetría</option>
+                                    <option value="ataxia">Ataxia</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="coordinacion_dedo_nariz" class="block text-sm font-medium text-gray-700">Prueba Dedo-Nariz</label>
+                                <select id="coordinacion_dedo_nariz" name="coordinacion_dedo_nariz" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="normal">Normal</option>
+                                    <option value="dismetría">Dismetría</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="coordinacion_talon_rodilla" class="block text-sm font-medium text-gray-700">Prueba Talón-Rodilla</label>
+                                <select id="coordinacion_talon_rodilla" name="coordinacion_talon_rodilla" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 p-2">
+                                    <option value="">Selecciona...</option>
+                                    <option value="normal">Normal</option>
+                                    <option value="dismetría">Dismetría</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Marcha -->
+                    <div class="col-span-full">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2 mt-4">Marcha</h3>
+                        <div>
+                            <label for="marcha_tipo" class="block text-sm font-medium text-gray-700">Tipo de Marcha</label>
+                            <select id="marcha_tipo" name="marcha_tipo" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 p-2">
+                                <option value="">Selecciona...</option>
+                                <option value="normal">Normal</option>
+                                <option value="ataxica">Atáxica</option>
+                                <option value="paretica">Parética</option>
+                                <option value="espastica">Espástica</option>
+                                <option value="festinante">Festinante</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Signos Meníngeos -->
+                    <div class="col-span-full">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2 mt-4">Signos Meníngeos</h3>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="meningeos_presentes" class="form-checkbox text-pink-600 rounded" data-toggle-target="meningeos_detalle">
+                            <span class="ml-1 text-sm">Signos Meníngeos presentes</span>
+                        </label>
+                        <div id="meningeos_detalle" class="mt-2 hidden-section">
+                            <label class="block text-sm font-medium text-gray-700">Tipo de Signos Meníngeos</label>
+                            <div class="flex flex-wrap gap-2 mt-1">
+                                <label class="inline-flex items-center"><input type="checkbox" name="meningeos_rigidezNuca" class="form-checkbox text-pink-600 rounded"> <span class="ml-1 text-sm">Rigidez de nuca</span></label>
+                                <label class="inline-flex items-center"><input type="checkbox" name="meningeos_brudzinski" class="form-checkbox text-pink-600 rounded"> <span class="ml-1 text-sm">Brudzinski</span></label>
+                                <label class="inline-flex items-center"><input type="checkbox" name="meningeos_kernig" class="form-checkbox text-pink-600 rounded"> <span class="ml-1 text-sm">Kernig</span></label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Reflejos Patológicos -->
+                    <div class="col-span-full">
+                        <h3 class="text-lg font-medium text-gray-700 mb-2 mt-4">Reflejos Patológicos</h3>
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="reflejos_patologicos_presentes" class="form-checkbox text-pink-600 rounded" data-toggle-target="reflejos_patologicos_detalle">
+                            <span class="ml-1 text-sm">Reflejos Patológicos presentes</span>
+                        </label>
+                        <div id="reflejos_patologicos_detalle" class="mt-2 hidden-section">
+                            <label class="block text-sm font-medium text-gray-700">Tipo de Reflejos Patológicos</label>
+                            <div class="flex flex-wrap gap-2 mt-1">
+                                <label class="inline-flex items-center"><input type="checkbox" name="reflejos_babinski" class="form-checkbox text-pink-600 rounded"> <span class="ml-1 text-sm">Babinski</span></label>
+                                <label class="inline-flex items-center"><input type="checkbox" name="reflejos_hoffman" class="form-checkbox text-pink-600 rounded"> <span class="ml-1 text-sm">Hoffman</span></label>
+                                <label class="inline-flex items-center"><input type="checkbox" name="reflejos_tromner" class="form-checkbox text-pink-600 rounded"> <span class="ml-1 text-sm">Tromner</span></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección: Genitourinario / Tacto Rectal -->
+            <div class="p-6 bg-orange-50 rounded-xl shadow-md border border-orange-200">
+                <h2 class="text-2xl font-semibold text-orange-800 mb-4 flex items-center justify-between">
+                    Genitourinario / Tacto Rectal
+                    <button type="button" class="btn-normal" data-section="genitourinario">Marcar como Normal</button>
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label for="gu_inspeccion_genital" class="block text-sm font-medium text-gray-700">Inspección Genital</label>
+                        <select id="gu_inspeccion_genital" name="gu_inspeccion_genital" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 p-2">
+                            <option value="">Selecciona...</option>
+                            <option value="normal">Normal</option>
+                            <option value="lesiones">Lesiones</option>
+                            <option value="secreciones">Secreciones</option>
+                            <option value="edema">Edema</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="gu_puntos_renales" class="block text-sm font-medium text-gray-700">Puntos Renales</label>
+                        <select id="gu_puntos_renales" name="gu_puntos_renales" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 p-2">
+                            <option value="">Selecciona...</option>
+                            <option value="noDolorosos">No dolorosos</option>
+                            <option value="dolorosos">Dolorosos</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="gu_ppl" class="block text-sm font-medium text-gray-700">Puño Percusión Lumbar</label>
+                        <select id="gu_ppl" name="gu_ppl" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 p-2">
+                            <option value="">Selecciona...</option>
+                            <option value="negativa">Negativa</option>
+                            <option value="positiva">Positiva</option>
+                        </select>
+                    </div>
+                    <div class="col-span-full">
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" id="gu_tacto_rectal_realizado" name="gu_tacto_rectal_realizado" class="form-checkbox text-orange-600 rounded" data-toggle-target="gu_tacto_rectal_detalle">
+                            <span class="ml-1 text-sm">Tacto Rectal realizado</span>
+                        </label>
+                        <div id="gu_tacto_rectal_detalle" class="mt-2 hidden-section">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="gu_tr_tono_esfinteriano" class="block text-sm font-medium text-gray-700">Tono Esfinteriano</label>
+                                    <select id="gu_tr_tono_esfinteriano" name="gu_tr_tono_esfinteriano" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 p-2">
+                                        <option value="">Selecciona...</option>
+                                        <option value="normal">Normal</option>
+                                        <option value="disminuido">Disminuido</option>
+                                        <option value="aumentado">Aumentado</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="gu_tr_ampolla_rectal" class="block text-sm font-medium text-gray-700">Ampolla Rectal</label>
+                                    <select id="gu_tr_ampolla_rectal" name="gu_tr_ampolla_rectal" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 p-2">
+                                        <option value="">Selecciona...</option>
+                                        <option value="vacia">Vacía</option>
+                                        <option value="ocupada">Ocupada</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="gu_tr_prostata" class="block text-sm font-medium text-gray-700">Próstata (Hombres)</label>
+                                    <select id="gu_tr_prostata" name="gu_tr_prostata" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-orange-500 focus:ring-orange-500 p-2">
+                                        <option value="">Selecciona...</option>
+                                        <option value="normal">Normal</option>
+                                        <option value="aumentadaTamano">Aumentada de tamaño</option>
+                                        <option value="sensible">Sensible</option>
+                                        <option value="irregular">Irregular</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="inline-flex items-center mt-1">
+                                        <input type="checkbox" name="gu_tr_sangre_guante" class="form-checkbox text-orange-600 rounded">
+                                        <span class="ml-1 text-sm">Sangre en guante</span>
+                                    </label>
+                                </div>
+                                <div>
+                                    <label class="inline-flex items-center mt-1">
+                                        <input type="checkbox" name="gu_tr_masas" class="form-checkbox text-orange-600 rounded">
+                                        <span class="ml-1 text-sm">Masas</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Campo de Observaciones Generales -->
+            <div class="p-6 bg-gray-50 rounded-xl shadow-md border border-gray-200">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">Observaciones Generales</h2>
+                <div>
+                    <label for="observaciones_generales" class="block text-sm font-medium text-gray-700">Anotaciones adicionales</label>
+                    <textarea id="observaciones_generales" name="observaciones_generales" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2"></textarea>
+                </div>
+            </div>
+
+            <div class="flex justify-end mt-8">
+                <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                    Guardar Exploración
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Estilos para los botones "Marcar como Normal"
+            const normalButtons = document.querySelectorAll('.btn-normal');
+            normalButtons.forEach(button => {
+                button.classList.add('bg-gray-200', 'hover:bg-gray-300', 'text-gray-700', 'font-semibold', 'py-1', 'px-3', 'rounded-full', 'text-sm', 'transition', 'duration-200', 'ease-in-out');
+            });
+
+            // Función para ocultar/mostrar elementos basados en un checkbox/radio
+            const setupToggleVisibility = () => {
+                const togglers = document.querySelectorAll('[data-toggle-target]');
+                togglers.forEach(toggler => {
+                    const targetId = toggler.dataset.toggleTarget;
+                    const targetElement = document.getElementById(targetId);
+                    const toggleType = toggler.dataset.toggleType || 'checkbox'; // 'checkbox' or 'radio'
+
+                    if (!targetElement) return;
+
+                    // Función para actualizar la visibilidad
+                    const updateVisibility = () => {
+                        let shouldShow = false;
+                        if (toggler.type === 'checkbox') {
+                            shouldShow = toggler.checked;
+                        } else if (toggler.type === 'radio') {
+                            // Check if the checked radio button has data-toggle-type="show"
+                            shouldShow = (toggler.checked && toggler.dataset.toggleType === 'show');
+                        }
+
+                        if (shouldShow) {
+                            targetElement.classList.remove('hidden-section');
+                        } else {
+                            targetElement.classList.add('hidden-section');
+                            // Opcional: Resetear los campos dentro del elemento oculto al esconderlo
+                            targetElement.querySelectorAll('input, select, textarea').forEach(input => {
+                                if (input.type === 'checkbox' || input.type === 'radio') {
+                                    input.checked = false;
+                                } else if (input.tagName === 'SELECT') {
+                                    input.selectedIndex = 0; // Selecciona la primera opción (generalmente "Selecciona...")
+                                } else {
+                                    input.value = '';
+                                }
+                                // Ocultar sub-detalles anidados si se reinicia un padre
+                                if (input.dataset.toggleTarget) {
+                                    document.getElementById(input.dataset.toggleTarget)?.classList.add('hidden-section');
+                                }
+                            });
+                        }
+                    };
+
+                    // Event listener para el cambio
+                    toggler.addEventListener('change', updateVisibility);
+
+                    // Establecer estado inicial al cargar la página
+                    updateVisibility();
+                });
+            };
+
+            // Función para marcar una sección como "Normal"
+            const setupNormalButtons = () => {
+                const normalButtons = document.querySelectorAll('.btn-normal');
+                normalButtons.forEach(button => {
+                    button.addEventListener('click', (event) => {
+                        const sectionId = event.target.dataset.section;
+                        const sectionElement = document.querySelector(`[data-section="${sectionId}"]`).closest('div'); // Encuentra el div padre de la sección
+
+                        if (!sectionElement) return;
+
+                        // Iterar sobre todos los inputs, selects y textareas dentro de la sección
+                        sectionElement.querySelectorAll('input, select, textarea').forEach(input => {
+                            // Resetear checkboxes y radios a no seleccionados/normal
+                            if (input.type === 'checkbox') {
+                                input.checked = false;
+                            } else if (input.type === 'radio') {
+                                // Para radios, necesitamos una lógica que marque el "normal" o lo deseleccione todo
+                                if (input.value === 'normal' || input.value === 'conservado' || input.value === 'ausente' || input.value === 'noVisiblePalpable' || input.value === 'sinAlteraciones' || input.value === 'noDolorosos' || input.value === 'normales' || input.value === 'permeables' || input.value === 'simetrico' || input.value === 'normal') {
+                                    input.checked = true; // Marcar la opción "Normal" si existe
+                                } else {
+                                    input.checked = false; // Desmarcar otras opciones
+                                }
+                            }
+                            // Resetear selects a la primera opción (generalmente "Selecciona...") o a una opción "normal" si existe
+                            else if (input.tagName === 'SELECT') {
+                                const normalOption = Array.from(input.options).find(option =>
+                                    option.value === 'normal' || option.value === 'conservada' || option.value === 'sinAlteraciones' || option.value === 'noPalpable' || option.value === 'presenteSimetrico' || option.value === 'normales' || option.value === 'plano'
+                                );
+                                if (normalOption) {
+                                    input.value = normalOption.value;
+                                } else {
+                                    input.selectedIndex = 0;
+                                }
+                            }
+                            // Vaciar campos de texto/número
+                            else {
+                                input.value = '';
+                            }
+
+                            // Asegurarse de que los elementos dinámicos se oculten si su padre se marca como "normal"
+                            if (input.dataset.toggleTarget) {
+                                document.getElementById(input.dataset.toggleTarget)?.classList.add('hidden-section');
+                            }
+                        });
+                        setupToggleVisibility(); // Vuelve a ejecutar para asegurar que los elementos ocultos se manejen correctamente.
+                    });
+                });
+            };
+
+            // Inicializar las funciones
+            setupToggleVisibility();
+            setupNormalButtons();
+
+            // Manejo del envío del formulario (ejemplo)
+            document.getElementById('physicalExamForm').addEventListener('submit', (event) => {
+                event.preventDefault(); // Prevenir el envío por defecto del formulario
+
+                const formData = new FormData(event.target);
+                const data = {};
+                for (let [key, value] of formData.entries()) {
+                    // Manejar checkboxes y radios de forma que no sobrescriban
+                    if (data[key] && (event.target.elements[key].type === 'checkbox' || event.target.elements[key].type === 'radio')) {
+                        if (!Array.isArray(data[key])) {
+                            data[key] = [data[key]];
+                        }
+                        data[key].push(value);
+                    } else if (event.target.elements[key].type === 'checkbox' && !event.target.elements[key].checked) {
+                        // Ignorar checkboxes no marcados
+                        continue;
+                    } else if (event.target.elements[key].type === 'radio' && !event.target.elements[key].checked) {
+                        // Ignorar radios no marcados
+                        continue;
+                    }
+                    else {
+                        data[key] = value;
+                    }
+                }
+                console.log('Datos del formulario:', data);
+
+                // Aquí podrías enviar los datos a un servidor o procesarlos.
+                // Por ejemplo, mostrar un mensaje de éxito:
+                alert('Formulario de exploración física guardado con éxito. ¡Revisa la consola para ver los datos!');
+            });
+        });
+    </script>
+</body>
+</html>
